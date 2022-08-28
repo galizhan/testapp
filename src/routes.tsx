@@ -2,6 +2,7 @@ import {Navigate, Outlet, useRoutes} from 'react-router-dom';
 import SignIn from "./ui/pages/signin";
 import SignUp from "./ui/pages/signup";
 import React from 'react';
+import Home from "./ui/pages/app/home";
 
 const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -10,7 +11,7 @@ const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
             path: '/app',
             element: isLoggedIn ? <Outlet/> : <Navigate to="/login"/>,
             children: [
-                // { path: '/dashboard', element: <Dashboard /> },
+                { path: '/app/dashboard', element: <Home /> },
             ],
         },
         {

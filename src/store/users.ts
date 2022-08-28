@@ -1,42 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
-
-const slice = createSlice({
-    name: "posts",
-    initialState: {
-        list: [],
-        loading: false,
+import User, {PaginatedUsers} from "../interfaces/user";
+interface UserStoreState{
+    list: PaginatedUsers,
+    loading: boolean
+}
+const initialState: UserStoreState = {
+    list: {
+        "page": 0,
+        "per_page": 0,
+        "total": 0,
+        "total_pages": 0,
+        "data": []
     },
+    loading: false,
+}
+const slice = createSlice({
+    name: "users",
+    initialState,
 
     reducers: {
-        postsRequested: (posts, action) => {
-            posts.loading = true;
+        usersRequested: (users, action) => {
+            users.loading = true;
         },
 
-        postsReceived: (posts, action) => {
-            posts.list = action.payload;
-            posts.loading = false;
+        usersReceived: (users, action) => {
+            users.list = action.payload;
+            users.loading = false;
         },
 
-        postsRequestFailed: (posts, action) => {
-            posts.loading = false;
+        usersRequestFailed: (users, action) => {
+            users.loading = false;
         },
     },
 });
 
 export default slice.reducer;
 
-const { postsRequested, postsReceived, postsRequestFailed } = slice.actions;
+const { usersRequested, usersReceived, usersRequestFailed } = slice.actions;
 
-const url = "/posts";
+const url = "/users";
 
-export const loadposts = () => (dispatch:any) => {
+export const loadusers = (page:number) => (dispatch:any) => {
+
     return dispatch(
         apiCallBegan({
-            url,
-            onStart: postsRequested.type,
-            onSuccess: postsReceived.type,
-            onError: postsRequestFailed.type,
+            url: `${url}?page=${page}`,
+            onStart: usersRequested.type,
+            onSuccess: usersReceived.type,
+            onError: usersRequestFailed.type,
         })
     );
 };

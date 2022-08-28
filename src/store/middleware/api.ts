@@ -16,7 +16,7 @@ const api =
 
                 try {
                     const response = await axios.request({
-                        baseURL: "https://jsonplaceholder.typicode.com",
+                        baseURL: "https://reqres.in/api",
                         url,
                         method,
                         data,
