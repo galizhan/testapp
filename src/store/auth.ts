@@ -37,13 +37,16 @@ const slice = createSlice({
         },
 
         registered: (auth, action) => {
+            // save token in localstorage and set isLoggedIn
             localStorage.setItem('app_token', action.payload.token);
             auth.isLoggedIn = true;
             auth.loading = false;
         },
 
         checkIsLoggedIn: (auth, action)=>{
-            auth.isLoggedIn = !!localStorage.getItem('app_token')
+            // we have to get user in normal cases to check log in, but we don't have "get me" route
+            // so we are checking just token
+            auth.isLoggedIn = !!localStorage.getItem('app_token');
         },
 
         logout: (auth, action)=>{

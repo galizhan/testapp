@@ -8,10 +8,12 @@ import {useSelector} from "react-redux";
 import NotFound from "./ui/pages/app/not-found";
 
 const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     let r = useRoutes([
         {
             path: '/app',
+            // redirects to /sign-in if logged in
             element: isLoggedIn ? <Outlet/> : <Navigate to="/sign-in"/>,
             children: [
                 { path: '/app/dashboard', element: <Home /> },
@@ -19,6 +21,7 @@ const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
         },
         {
             path: '/',
+            // redirects to /app/dashboard if logged in
             element: !isLoggedIn ? <Outlet/> : <Navigate to="/app/dashboard"/>,
             children: [
                 {path: 'sign-in', element: <SignIn/>},
@@ -27,6 +30,7 @@ const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
             ],
         },
         {
+            // redirect everything else to not found page
             path: '*',
             element: <NotFound/>
         }

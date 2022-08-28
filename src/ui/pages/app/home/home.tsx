@@ -14,6 +14,7 @@ function Home(props : Props) {
     const users = useSelector((state: RootState) => state.user.list);
 
     useEffect(() => {
+        // getting users on mount
         // @ts-ignore
         dispatch(loadusers(1));
     }, [dispatch]);
