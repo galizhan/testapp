@@ -1,20 +1,27 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import {combineReducers, configureStore, getDefaultMiddleware, PreloadedState} from "@reduxjs/toolkit";
 import UserReducer from "./users";
 import AuthReducer from "./auth";
 import api from "./middleware/api";
 import {useDispatch} from "react-redux";
 
+const rootReducer = combineReducers({
+     auth: AuthReducer,
+    user: UserReducer
+})
+export type RootState = ReturnType<typeof rootReducer>;
 
-const store = configureStore({
-       reducer: {
-           auth: AuthReducer,
-           user: UserReducer
-       },
-        middleware: [...getDefaultMiddleware(), api],
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+    return configureStore({
+    reducer: rootReducer,
+    middleware: [...getDefaultMiddleware(), api],
+        preloadedState
 
-    });
-export type AppDispatch = typeof store.dispatch
+})
+
+}
+export type AppDispatch = AppStore['dispatch']
 export const useAppDispatch: () => AppDispatch = useDispatch
 
-export default store;
-export type RootState = ReturnType<typeof store.getState>
+export default setupStore;
+export type AppStore = ReturnType<typeof setupStore>
+

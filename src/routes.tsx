@@ -2,7 +2,7 @@ import {Navigate, Outlet, useRoutes} from 'react-router-dom';
 import SignIn from "./ui/pages/signin";
 import SignUp from "./ui/pages/signup";
 import React from 'react';
-import Home from "./ui/pages/app/home";
+import Home from "./ui/pages/app/home/home";
 import {RootState, useAppDispatch} from "./store/configure-store";
 import {useSelector} from "react-redux";
 import NotFound from "./ui/pages/app/not-found";

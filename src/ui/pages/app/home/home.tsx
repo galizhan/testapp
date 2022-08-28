@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {loadusers} from "../../../store/users";
-import {RootState, useAppDispatch} from "../../../store/configure-store";
-import Header from "../../components/header";
+import {loadusers} from "../../../../store/users";
+import {RootState, useAppDispatch} from "../../../../store/configure-store";
+import Header from "../../../components/header";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from "@mui/material";
-import {logout} from "../../../store/auth";
+import {logout} from "../../../../store/auth";
 
 interface Props{
 

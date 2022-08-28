@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
-import store from "./store/configure-store";
+import setupStore from "./store/configure-store";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+const preloadedState = {};
+
+const store = setupStore(preloadedState);
 root.render(
   <React.StrictMode>
       <Provider store={store}>
