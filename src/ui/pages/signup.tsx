@@ -11,16 +11,24 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {useAppDispatch} from "../../store/configure-store";
+import {login} from "../../store/auth";
 
 
 export default function SignUp() {
+    const dispatch = useAppDispatch();
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+        const password = data.get('password');
+        if(email && password){
+            // @ts-ignore
+            dispatch(login({
+                email: email as string,
+                password: password as string
+            }));
+        }
     };
 
     return (
