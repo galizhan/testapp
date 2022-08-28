@@ -17,9 +17,10 @@ import User from "../../interfaces/user";
 import {Link} from "react-router-dom";
 
 interface Props{
-    user?: User
+    user?: User,
+    onLogout: ()=>void
 }
-function Header({user}: Props) {
+function Header({user, onLogout}: Props) {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -107,7 +108,7 @@ function Header({user}: Props) {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            <MenuItem>
+                            <MenuItem onClick={onLogout}>
                                 <Typography textAlign="center">logout</Typography>
                             </MenuItem>
                         </Menu>

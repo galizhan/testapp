@@ -4,6 +4,7 @@ import {loadusers} from "../../../store/users";
 import {RootState, useAppDispatch} from "../../../store/configure-store";
 import Header from "../../components/header";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from "@mui/material";
+import {logout} from "../../../store/auth";
 
 interface Props{
 
@@ -19,7 +20,10 @@ function Home(props : Props) {
 
     return (
         <div>
-            <Header user={users.data[0]}/>
+            <Header user={users.data[0]} onLogout={()=>{
+                // @ts-ignore
+                dispatch(logout());
+            }}/>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
