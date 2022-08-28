@@ -4,7 +4,7 @@ import User from "../interfaces/user";
 
 interface AuthState{
     loading: boolean,
-    loggedIn: boolean
+    isLoggedIn: boolean
 }
 
 interface LoginArgs{
@@ -18,7 +18,7 @@ interface RegisterArgs{
 }
 
 const initialState: AuthState = {
-    loggedIn: false,
+    isLoggedIn: false,
     loading: false,
 }
 const slice = createSlice({
@@ -32,20 +32,22 @@ const slice = createSlice({
 
         loggedIn: (auth, action) => {
             localStorage.setItem('app_token', action.payload.token)
+            auth.isLoggedIn = true;
             auth.loading = false;
         },
 
         registered: (auth, action) => {
-            localStorage.setItem('app_token', action.payload.token)
+            localStorage.setItem('app_token', action.payload.token);
+            auth.isLoggedIn = true;
             auth.loading = false;
         },
 
-        isLoggedIn: (auth, action)=>{
-            auth.loggedIn = !!localStorage.getItem('token')
+        checkIsLoggedIn: (auth, action)=>{
+            auth.isLoggedIn = !!localStorage.getItem('token')
         },
 
         logout: (auth, action)=>{
-            auth.loggedIn = false;
+            auth.isLoggedIn = false;
             localStorage.removeItem('token');
         },
         authRequestFailed: (auth, action) => {
@@ -56,14 +58,14 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-const { authRequested, loggedIn,isLoggedIn, logout, registered, authRequestFailed } = slice.actions;
+const { authRequested, loggedIn,checkIsLoggedIn, logout, registered, authRequestFailed } = slice.actions;
 
-const url = "/auth";
+const url = "/";
 
 export const login = (loginData: LoginArgs) => (dispatch:any) => {
     return dispatch(
         apiCallBegan({
-            url,
+            url:`/login`,
             onStart: authRequested.type,
             onSuccess: loggedIn.type,
             onError: authRequestFailed.type,
@@ -75,7 +77,7 @@ export const login = (loginData: LoginArgs) => (dispatch:any) => {
 export const register = (registerData:RegisterArgs) => (dispatch:any) => {
     return dispatch(
         apiCallBegan({
-            url,
+            url:`/register`,
             onStart: authRequested.type,
             onSuccess: registered.type,
             onError: authRequestFailed.type,
@@ -83,5 +85,5 @@ export const register = (registerData:RegisterArgs) => (dispatch:any) => {
         })
     );
 };
-export {logout, isLoggedIn};
+export {logout, checkIsLoggedIn};
 
