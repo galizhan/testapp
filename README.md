@@ -3,8 +3,19 @@
 This is my vision of test app
 
 ## See project on Vercel
-You can visit [my Vercel app](https://testapp-e19z7yrii-galixkz.vercel.app/sign-in)
-to test it
+You can visit [my Vercel app](https://testapp-e19z7yrii-galixkz.vercel.app/sign-in) to test it
+
+### Screenshots
+![Main App Image](./docs/images/main-app.png?raw=true "Main app")
+Home Page
+
+![Main App Image](./docs/images/sign-in.png?raw=true "Main app")
+Sign In
+
+
+![Main App Image](./docs/images/sign-up.png?raw=true "Main app")
+Sign Up
+
 ## Getting started
 
 Install all dependencies
