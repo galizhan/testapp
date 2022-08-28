@@ -5,6 +5,7 @@ import React from 'react';
 import Home from "./ui/pages/app/home";
 import {RootState, useAppDispatch} from "./store/configure-store";
 import {useSelector} from "react-redux";
+import NotFound from "./ui/pages/app/not-found";
 
 const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -25,7 +26,10 @@ const Routing = ({isLoggedIn} : {isLoggedIn: boolean}) => {
                 {path: '/', element: <Navigate to="/sign-in"/>},
             ],
         },
-
+        {
+            path: '*',
+            element: <NotFound/>
+        }
     ])
     return r;
 };

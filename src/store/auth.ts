@@ -43,12 +43,12 @@ const slice = createSlice({
         },
 
         checkIsLoggedIn: (auth, action)=>{
-            auth.isLoggedIn = !!localStorage.getItem('token')
+            auth.isLoggedIn = !!localStorage.getItem('app_token')
         },
 
         logout: (auth, action)=>{
             auth.isLoggedIn = false;
-            localStorage.removeItem('token');
+            localStorage.removeItem('app_token');
         },
         authRequestFailed: (auth, action) => {
             auth.loading = false;
